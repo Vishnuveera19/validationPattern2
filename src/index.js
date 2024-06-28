@@ -194,11 +194,11 @@ root.render(
 
      <Route path='/AttendenceTable' element={<AttendenceTable/>}></Route>
      <Route path='/AttendenceForm' element={<AttendenceForm/>}></Route>
-
+~
      <Route path='/EarnDeductTable' element={<EarnDeductTable/>}></Route>
      <Route path='/EarnDeductForm' element={<EarnDeductForm/>}></Route>
 
-     <Route path='/Form7table' element={<Form7table/>}></Route>
+     <Route path='/Form7table' element={<Form7table />}></Route>
      <Route path='/SampleForm7' element={<SampleForm7/>}></Route>
 
      <Route path='/HrAuthenticationTable' element={<HrAuthenticationTable/>}></Route>

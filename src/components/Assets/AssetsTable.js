@@ -27,23 +27,24 @@ const PlusIcon = createSvgIcon(
 
 
 const AssetsTable = () => {
-    const navigate = useNavigate();
-    const [data,setData]=useState([])
-    useEffect(()=>{
-        getRequest(ServerConfig.url,ASSETS).then((e)=>{
-            setData(e.data);
-        })
-    },[]
-);
-        function  handleonclick(){
-            navigate('/SampleForm')
-        }
-  return (
-    <div>
-        <JsonToTable json={data} />
-        <Grid margin={5}><Button variant='outlined' color='success' onClick={handleonclick}>Add<PlusIcon/></Button></Grid>
-    </div>
-  )
+const navigate = useNavigate();
+const [data,setData] = useState([])
+useEffect(()=>{
+    getRequest(ServerConfig.url, ASSETS).then((e)=>{
+        setData(e.data);
+    }
+)
+},[]);
+
+function handleonclick(){
+    navigate('/SampleForm')
+}
+return (
+<div>
+     <JsonToTable json={data}/>
+<Grid margin={5}><Button variant='outlined' color='success' onClick={handleonclick}>Add<PlusIcon/></Button></Grid>
+</div>
+)
 }
 
 export default AssetsTable

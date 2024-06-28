@@ -3,7 +3,7 @@ import { Grid,Card,
     Button,
     Typography,
     Box,
-    CardContent,
+    CardContent,FormHelperText,
     FormControl
   } from '@mui/material';
 
@@ -42,10 +42,31 @@ import { Grid,Card,
   const [loanInterest,setLoanInterest]=useState("")
   const [loanName,setLoanName]=useState("")
   
-  
-  
-  
-  
+
+
+  const [employeeError,setEmployeeError]=useState(false)
+  const [companyError,setCompanyError]=useState(false)
+  const [branchError,setBranchError]=useState(false)
+  const [pnCompanyIdError,setPnCompanyIdError]=useState(false)
+  const [pnBranchIdError,setPnBranchIdError]=useState(false)
+  const [pnEmployeeIdError,setPnEmployeeIdError]=useState(false)
+  const [loanAppidError,setLoanAppidError]=useState(false)
+  const [dDateError,setDDateError]=useState(false)
+  const [nLoanamountError,setNLoanamountError]=useState(false)
+  const [nBalanceamountError,setNBalanceamountError]=useState(false)
+  const [nPaidamountError,setNPaidamountError]=useState(false)  
+  const [nClosureamountError,setNClosureamountError]=useState(false)
+  const [nChecknoError,setNChecknoError]=useState(false)
+  const [dCheckdateError,setDCheckdateError]=useState(false)
+  const [nCheckamountError,setNCheckamountError]=useState(false)
+  const [vBanknameError,setVBanknameError]=useState(false)
+  const [vRemarksError,setVRemarksError]=useState(false)
+  const [cStatusError,setCStatusError]=useState(false)
+  const [intAmtError,setIntAmtError]=useState(false)
+  const [paymentModeError,setPaymentModeError]=useState(false)
+  const [loanProcessError,setLoanProcessError]=useState(false)
+  const [loanInterestError,setLoanInterestError]=useState(false)
+  const [loanNameError,setLoanNameError]=useState(false)
   
   useEffect(() => {
     async function getData() {
@@ -56,10 +77,137 @@ import { Grid,Card,
   }, []);
   
   
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    switch (name) {
+      case 'pnCompanyId':
+        setCompany(value);
+        setCompanyError(false);
+        break;
+      case 'pnBranchId':
+        setBranch(value);
+        setBranchError(false);
+        break;
+      case 'pnEmployeeId':
+        setPnEmployeeId(value);
+        setPnEmployeeIdError(!/^\d+$/.test(value) || !value);
+        break;
+      case 'loanAppid':
+        setLoanAppid(value);
+        setLoanAppidError(!/^[A-Za-z0-9\s]{1,20}$/.test(value) || !value);
+        break;
+      case 'nLoanamount':
+        setNLoanamount(value);
+        setNLoanamountError(!/^\d+(\.\d+)?$/.test(value));
+        break;
+        case 'nBalanceamount':
+        setNBalanceamount(value);
+        setNBalanceamountError(!/^\d+(\.\d+)?$/.test(value));
+        break;
+        case 'nPaidamount':
+        setNPaidamount(value);
+        setNPaidamountError(!/^\d+(\.\d+)?$/.test(value));
+        break;
+        case 'nClosureamount':
+        setNClosureamount(value);
+        setNClosureamountError(!/^\d+(\.\d+)?$/.test(value));
+        break;
+      case 'nCheckno':
+        setNCheckno(value);
+        setNChecknoError(!/^[A-Za-z0-9\s]{1,20}$/.test(value) || !value);
+        break;
+        case 'nCheckamount':
+        setNCheckamount(value);
+        setNCheckamountError(!/^\d+(\.\d+)?$/.test(value));
+        break;
+        case 'vBankname':
+        setVBankname(value);
+        setVBanknameError(!/^[A-Za-z0-9\s]{1,20}$/.test(value) || !value);
+        break;
+        case 'vRemarks':
+        setVRemarks(value);
+        setVRemarksError(!/^[A-Za-z0-9\s]{1,20}$/.test(value) || !value);
+        break;
+        case 'cStatus':
+        setCStatus(value);
+        setCStatusError(!/^[A-Za-z\s]{1}$/.test(value) || !value);
+        break;
+        case 'intAmt':
+          setIntAmt(value);
+          setIntAmtError(!/^\d+(\.\d+)?$/.test(value));
+          break;
+        case 'paymentMode':
+        setPaymentMode(value);
+        setPaymentModeError(!/^[A-Za-z0-9\s]{1,20}$/.test(value) || !value);
+        break;
+        case 'loanProcess':
+        setLoanProcess(value);
+        setLoanProcessError(!/^[A-Za-z0-9\s]{1,20}$/.test(value) || !value);
+        break;
+        case 'loanInterest':
+          setLoanInterest(value);
+          setLoanInterestError(!/^\d+(\.\d+)?$/.test(value));
+          break;
+          case 'loanName':
+        setLoanName(value);
+        setLoanNameError(!/^[A-Za-z0-9\s]{1,20}$/.test(value) || !value);
+        break;
+        
+      default:
+        break;
+    }
+  };
+
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  const formData = {
-    pnCompanyId: pnCompanyId,
+    e.preventDefault();
+
+    setCompanyError(!company);
+    setBranchError(!branch);
+    setPnEmployeeIdError(!/^\d+$/.test(pnEmployeeId) || !pnEmployeeId);
+    setLoanAppidError(!/^[A-Za-z0-9\s]{1,20}$/.test(loanAppid) || !loanAppid);
+    setNLoanamountError(!/^\d+(\.\d+)?$/.test(nLoanamount) || !nLoanamount);
+    setNBalanceamountError(!/^\d+(\.\d+)?$/.test(nBalanceamount) || !nBalanceamount);
+    setNPaidamountError(!/^\d+(\.\d+)?$/.test(nPaidamount) || !nPaidamount);
+    setNClosureamountError(!/^\d+(\.\d+)?$/.test(nClosureamount) || !nClosureamount);
+    setNChecknoError(!/^[A-Za-z0-9\s]{1,20}$/.test(nCheckno) || !nCheckno);
+    setNCheckamountError(!/^\d+(\.\d+)?$/.test(nCheckamount) || !nCheckamount);
+    setVBanknameError(!/^[A-Za-z0-9\s]{1,20}$/.test(vBankname) || !vBankname);
+    setVRemarksError(!/^[A-Za-z0-9\s]{1,20}$/.test(vRemarks) || !vRemarks);
+    setCStatusError(!/^[A-Za-z\s]{1}$/.test(cStatus) || !cStatus);
+    setIntAmtError(!/^\d+(\.\d+)?$/.test(intAmt) || ! intAmt);
+    setPaymentModeError(!/^[A-Za-z0-9\s]{1,20}$/.test(paymentMode) || !paymentMode);
+    setLoanProcessError(!/^[A-Za-z0-9\s]{1,20}$/.test(loanProcess) || !loanProcess);
+    setLoanInterestError(!/^\d+(\.\d+)?$/.test(loanInterest) || ! loanInterest);
+    setLoanNameError(!/^[A-Za-z0-9\s]{1,20}$/.test(loanName) || !loanName);
+
+
+
+
+
+    if (!company || !branch || !pnEmployeeId || !loanAppid || 
+    
+      ! nLoanamount||
+      !nBalanceamount||
+      ! nPaidamount||
+    !nClosureamount||
+      ! nCheckno||
+      !nCheckamount||
+      ! dCheckdate||
+      ! nCheckamount||
+    ! vBankname||
+      !  vRemarks||
+    ! cStatus||
+      !intAmt||
+      ! paymentMode||
+      ! loanProcess||
+      !loanInterest||
+      !loanName ) {
+      return;
+    }
+
+    const formData = {
+      pnCompanyId: pnCompanyId,
     pnBranchId: pnBranchId,
     pnEmployeeId: pnEmployeeId,
     loanAppid: loanAppid,
@@ -82,11 +230,18 @@ import { Grid,Card,
     paymBranch:{
       "pnbranchId":pnBranchId 
     }
-    
-  
+    };
+
+    try {
+      await postRequest(ServerConfig.url, LOANPRECLOSERS, formData);
+      navigate('/LoanPreCloserTable')
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
   };
-  console.log(formData)
-  };
+
+
+
   
     const margin={margin:"0 5px"}
     return (
@@ -95,7 +250,7 @@ import { Grid,Card,
         <Card style = {{maxWidth: 600, margin: "0 auto"}}>
         <CardContent>
         <Typography variant='h5' color='S- Light' align='center'>LOAN PRECLOSER</Typography>
-        <form>
+        <form onSubmit={handleSubmit}>
        
         <Grid container spacing={2} inputlabelprops={{shrink:true}}>
             <Grid item xs={12} sm={6} >
@@ -103,10 +258,9 @@ import { Grid,Card,
              
               <InputLabel shrink>Company</InputLabel>
                  <select name = "pnCompanyId" 
-                 onChange={(e)=>{
-                  setPnCompanyId(e.target.value)
+                 onChange={handleChange}
                   
-                 }}
+                
                  style={{ height: '50px' }}
                 
                  >
@@ -117,6 +271,8 @@ import { Grid,Card,
                         
                      }
                  </select>
+                 {pnCompanyIdError && <FormHelperText  style={{color:"red"}}>Please select a company</FormHelperText>}
+
               </FormControl >
                   </Grid>
                   <Grid xs={12} sm={6} item>
@@ -137,6 +293,8 @@ import { Grid,Card,
                 }
 
                  </select>
+                 {pnBranchIdError && <FormHelperText style={{color:"red"}}>Please select a branch</FormHelperText>}
+
                  </FormControl>
                   </Grid>
   
@@ -153,9 +311,11 @@ import { Grid,Card,
                  variant="outlined"
                  fullWidth
                  required 
-                   onChange={(e) => setPnEmployeeId(e.target.value)} 
+                 onChange={handleChange}
                    InputLabelProps={{ shrink: true }} 
                    /> 
+                {pnEmployeeId && <FormHelperText  style={{color:"red"}}>Please enter values</FormHelperText>}
+
                  </FormControl>
                   </Grid>
   
@@ -172,10 +332,11 @@ import { Grid,Card,
                  variant="outlined"
                  fullWidth
                  required 
-                   onChange={(e) => setLoanAppid(e.target.value)} 
+                   onChange={handleChange} 
                    InputLabelProps={{ shrink: true }} 
                    /> 
-                
+             {pnEmployeeId && <FormHelperText  style={{color:"red"}}>Please enter values</FormHelperText>}
+
               </FormControl >
                   </Grid>
   
@@ -191,6 +352,8 @@ import { Grid,Card,
                  type="datetime-local"
                    onChange={(e) => setDDate(e.target.value)} 
                    InputLabelProps={{ shrink: true }}  /> 
+          {dDateError && <FormHelperText  style={{color:"red"}}>Please enter values</FormHelperText>}
+
                  </FormControl>
                  </Grid>
                   <Grid  xs={12}  sm={6} item>
@@ -201,9 +364,11 @@ import { Grid,Card,
                     variant="outlined"
                     fullWidth
                     required
-                    onChange={(e) => setNLoanamount(e.target.value)} 
+                    onChange={handleChange} 
                     InputLabelProps={{ shrink: true }} 
                   />
+              {nLoanamountError && <FormHelperText  style={{color:"red"}}>Please enter values</FormHelperText>}
+
                   </FormControl>
                   </Grid>
   
@@ -217,9 +382,11 @@ import { Grid,Card,
                    
                     fullWidth
                     required
-                    onChange={(e) => setNBalanceamount(e.target.value)} 
+                    onChange={handleChange} 
                     InputLabelProps={{ shrink: true }} 
                   />
+                  {nBalanceamountError && <FormHelperText  style={{color:"red"}}>Please enter values</FormHelperText>}
+
                   </FormControl>
                   </Grid>
   
@@ -234,9 +401,11 @@ import { Grid,Card,
                     variant="outlined"
                     fullWidth
                     required
-                    onChange={(e) =>  setNPaidamount(e.target.value)} 
+                    onChange={handleChange} 
                     InputLabelProps={{ shrink: true }} 
                   />
+                {nPaidamountError && <FormHelperText  style={{color:"red"}}>Please enter values</FormHelperText>}
+
                   </FormControl>
                   </Grid>
   
@@ -249,9 +418,11 @@ import { Grid,Card,
                     variant="outlined"
                     fullWidth
                     required
-                    onChange={(e) =>  setNClosureamount(e.target.value)} 
+                    onChange={handleChange} 
                     InputLabelProps={{ shrink: true }} 
                   />
+                                  {nClosureamountError && <FormHelperText  style={{color:"red"}}>Please enter values</FormHelperText>}
+
                   </FormControl>
                   </Grid>
   
@@ -266,9 +437,11 @@ import { Grid,Card,
                     
                     fullWidth
                     required
-                    onChange={(e) => setNCheckno (e.target.value)} 
+                    onChange={handleChange} 
   
                   />
+                {nChecknoError && <FormHelperText  style={{color:"red"}}>Please enter values</FormHelperText>}
+
                   </FormControl>
                   </Grid>
   
@@ -289,6 +462,8 @@ import { Grid,Card,
   
   
                   />
+                {dCheckdateError && <FormHelperText  style={{color:"red"}}>Please enter values</FormHelperText>}
+
                   </FormControl>
                   </Grid>
   
@@ -306,9 +481,11 @@ import { Grid,Card,
   
                     fullWidth
                     required
-                    onChange={(e) =>setNCheckamount(e.target.value)} 
+                    onChange={handleChange} 
   
                   />
+                  {nCheckamountError && <FormHelperText  style={{color:"red"}}>Please enter values</FormHelperText>}
+
                   </FormControl>
                   </Grid>
   
@@ -324,9 +501,11 @@ import { Grid,Card,
                    
                     fullWidth
                     required
-                    onChange={(e) => setVBankname(e.target.value)} 
+                    onChange={handleChange} 
                     
                   />
+                {vBanknameError && <FormHelperText  style={{color:"red"}}>Please enter values</FormHelperText>}
+
                   </FormControl>
                   </Grid>
                  
@@ -340,9 +519,11 @@ import { Grid,Card,
                     
                     fullWidth
                     required
-                    onChange={(e) =>setVRemarks(e.target.value)} 
+                    onChange={handleChange} 
   
                   />
+                {vRemarksError && <FormHelperText  style={{color:"red"}}>Please enter values</FormHelperText>}
+
                   </FormControl>
                   </Grid>
   
@@ -357,9 +538,11 @@ import { Grid,Card,
                     
                     fullWidth
                     required
-                    onChange={(e) =>setCStatus(e.target.value)} 
+                    onChange={handleChange} 
   
                   />
+                  {cStatusError && <FormHelperText  style={{color:"red"}}>Please enter values</FormHelperText>}
+
                   </FormControl>
                   </Grid>
   
@@ -374,9 +557,11 @@ import { Grid,Card,
                     
                     fullWidth
                     required
-                    onChange={(e) =>setIntAmt(e.target.value)} 
+                    onChange={handleChange} 
   
                   />
+                  {intAmtError && <FormHelperText  style={{color:"red"}}>Please enter values</FormHelperText>}
+
                   </FormControl>
                   </Grid>
 
@@ -390,9 +575,11 @@ import { Grid,Card,
                     
                     fullWidth
                     required
-                    onChange={(e) =>setPaymentMode(e.target.value)} 
+                    onChange={handleChange} 
   
                   />
+              {paymentModeError && <FormHelperText  style={{color:"red"}}>Please enter values</FormHelperText>}
+
                   </FormControl>
                   </Grid>
                   <Grid  xs={12}  sm={6} item>
@@ -405,9 +592,11 @@ import { Grid,Card,
                     
                     fullWidth
                     required
-                    onChange={(e) =>setLoanProcess(e.target.value)} 
+                    onChange={handleChange} 
   
                   />
+                                  {loanProcessError && <FormHelperText  style={{color:"red"}}>Please enter values</FormHelperText>}
+
                   </FormControl>
                   </Grid>
                   <Grid  xs={12}  sm={6} item>
@@ -420,9 +609,12 @@ import { Grid,Card,
                     
                     fullWidth
                     required
-                    onChange={(e) =>setLoanInterest(e.target.value)} 
+                    onChange={handleChange} 
   
+
                   />
+                {loanInterestError && <FormHelperText  style={{color:"red"}}>Please enter values</FormHelperText>}
+
                   </FormControl>
                   </Grid>
                   <Grid  xs={12}  sm={6} item>
@@ -435,9 +627,11 @@ import { Grid,Card,
                     
                     fullWidth
                     required
-                    onChange={(e) =>setLoanName(e.target.value)} 
+                    onChange={handleChange} 
   
                   />
+                {loanNameError && <FormHelperText  style={{color:"red"}}>Please enter values</FormHelperText>}
+
                   </FormControl>
                   </Grid>
   
@@ -447,42 +641,7 @@ import { Grid,Card,
               
               <Grid item xs ={12} align="right" >
                 <Button style={margin} type="reset" variant='outlined' color='primary' >RESET</Button>
-                <Button onClick={()=>{
-  const formData = {
-    pnCompanyId: pnCompanyId,
-    pnBranchId: pnBranchId,
-    pnEmployeeId: pnEmployeeId,
-    loanAppid: loanAppid,
-    dDate: dDate,
-    nLoanamount: nLoanamount,
-    nBalanceamount: nBalanceamount,
-    nPaidamount: nPaidamount,
-    nClosureamount:   nClosureamount,
-    nCheckno: nCheckno,
-    dCheckdate: dCheckdate,
-    nCheckamount: nCheckamount,
-    vBankname: vBankname,
-    vRemarks:  vRemarks,
-    cStatus:  cStatus,
-    intAmt:  intAmt,
-    paymentMode: paymentMode,
-    loanProcess: loanProcess,
-    loanInterest:  loanInterest,
-    loanName:  loanName,
-    paymBranch:{
-      PnCompany:{
-      "pnbranchId":pnBranchId 
-    }
-  }
-  
-  };
-  console.log(formData)
-  postRequest(ServerConfig.url,LOANPRECLOSERS, formData).then((e)=>{
-  console.log(e)
-  navigate('/LoanPreCloserTable')
-  }).catch((e)=>console.log(e));
-  
-                  
+                <Button onClick={()=>{      
                 }}  
         variant='contained' color='primary' >SAVE</Button>
               </Grid>
